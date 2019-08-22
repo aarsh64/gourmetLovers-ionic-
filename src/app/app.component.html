@@ -1,17 +1,23 @@
-<ion-app>
+<ion-app >
   <ion-split-pane>
     <ion-menu type="overlay">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Menu</ion-title>
+          <ion-title color="primary">Menu</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
+          <ion-item>
+              <ion-avatar slot="start">
+                <img src="https://cdn-static.denofgeek.com/sites/denofgeek/files/styles/main_wide/public/deadpool_super_duper_cut_deleted_scene_x-men.jpg?itok=3AzQAtQ2">
+              </ion-avatar><br>
+              <ion-label>Aarsh Pandit</ion-label>
+            </ion-item>
         <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+          <ion-menu-toggle  auto-hide="false" *ngFor="let p of appPages">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
-              <ion-label>
+              <ion-icon color="primary" slot="start" [name]="p.icon"></ion-icon>
+              <ion-label color="primary">
                 {{p.title}}
               </ion-label>
             </ion-item>

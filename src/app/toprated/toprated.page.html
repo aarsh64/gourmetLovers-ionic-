@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons button color="twitter" slot="start">
+          <ion-menu-button color="primary"></ion-menu-button>
+        </ion-buttons>
+    <ion-title color="primary">Top Rated</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div>
+        <ion-grid>
+            <ion-col size="6" *ngFor="let x of restaurantDetails;">
+              <ion-card padding=".1px" height="5px" width="5px">
+              <div>  <ion-card-title>{{ x.name }}<ion-card-title color="success"></ion-card-title></ion-card-title></div>
+                    <ion-img [src]="x.image"></ion-img><br>
+                    <ion-rating [(rate)]="x.rating" readonly="false" size="default"></ion-rating><br>
+                  <!-- <span>{{x.rating}}</span>  -->
+                   <!-- <ngb-rating [(rate)]="x.rating">
+                      <ng-template let-fill="fill" let-index="index">
+                          <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                        </ng-template>
+                  </ngb-rating> -->
+                  <span><b>Location:</b></span>{{x.location}}<br>
+                  <hr width="100%">
+              </ion-card>
+            </ion-col>
+        </ion-grid>
+      </div>
+</ion-content>

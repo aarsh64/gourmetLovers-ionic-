@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+    <ion-buttons  slot="start">
+      <ion-menu-button color="primary"></ion-menu-button>
     </ion-buttons>
-    <ion-title>
+    <ion-title color="primary">
       List
     </ion-title>
   </ion-toolbar>
@@ -11,11 +11,11 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
+    <ion-item *ngFor="let item of items;let i = index;"  [class.selected]="x===selectedCategory" (click)="onTap(i)">
+      <ion-icon color="primary" [name]="item.icon" slot="start"></ion-icon>
       {{item.title}}
       <div class="item-note" slot="end">
-        {{item.note}}
+        <!-- {{item.note}} -->
       </div>
     </ion-item>
   </ion-list>

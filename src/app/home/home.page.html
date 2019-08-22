@@ -1,44 +1,62 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+    <ion-buttons button color="twitter" slot="start">
+      <ion-menu-button color="primary"></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      Home
+    <ion-title (click)="ngOnInit()" color="primary">
+      🍔Gourmet Lovers🍕
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-card class="welcome-card">
-      <img src="/assets/shapes.svg" alt="" />
-      <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to Ionic</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
-      </ion-card-content>
-    </ion-card>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Resources</ion-label>
-      </ion-list-header>
-      <ion-item href="https://ionicframework.com/docs/">
-        <ion-icon slot="start" color="medium" name="book"></ion-icon>
-        <ion-label>Ionic Documentation</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-        <ion-icon slot="start" color="medium" name="build"></ion-icon>
-        <ion-label>Scaffold Out Your App</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/layout/structure">
-        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-        <ion-label>Change Your App Layout</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/theming/basics">
-        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-        <ion-label>Theme Your App</ion-label>
-      </ion-item>
-    </ion-list>
-</ion-content>
+<ion-content padding=2px;>
+  <input id="searchbar1" form  ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" placeholder="Location 📍 based search" autocorrect="off" autocapitalize="off" spellcheck="off" type="search" class="form-control my-sm-0" #search [formControl]="searchControl">
+    <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="zoom">
+        <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
+      </agm-map>
+      <div width=50px height="30px">
+          <ion-chip size="small" color="primary" (click)="coffeeshop()">
+             <ion-icon color="danger" name="cafe"></ion-icon>
+             <ion-label>Coffee Shop</ion-label>
+           </ion-chip>
+           <ion-chip size="small" color="primary" (click)="fastfood()">
+               <ion-icon color="danger" name="pizza"></ion-icon>
+               <ion-label>Fast Food</ion-label>
+             </ion-chip>
+           <ion-chip size="small" color="primary" (click)="desserts()">
+               <ion-icon color="danger" name="ice-cream"></ion-icon>
+               <ion-label>Desserts</ion-label>
+             </ion-chip> 
+         </div>
+      
+  <div>
+    <ion-grid width="auto">
+      <ion-col *ngFor="let x of restaurantDetails; let i = index">
+        <ion-card padding=".1%" height="5px" width="5px">
+          <div>
+            <ion-card-title>{{ x.name }}
+                <button class="heart" data-toggle="tooltip" data-placement="bottom" title="Press to make it your favourite!" (click)="addToFavourites(x, i)">
+                    💙
+                  </button>
+            </ion-card-title>
+              <br>
+          </div>
+          <br/>
+          <ion-img width="50px" height="50px" [src]="x.image"></ion-img><br />
+          <ion-rating [(rate)]="x.rating" readonly="false" size="small"></ion-rating><br/>
+          <span><b>Location:</b></span>{{ x.location }}<br />
+          <!-- <b>Date:</b><span>{{ x.date.month }}/{{ x.date.year }}</span> -->
+          <hr width="100%" />
+        </ion-card>
+      </ion-col>
+    </ion-grid>   
+  </div>
+ </ion-content>
+ 
+ <ion-footer>
+    <ion-fab vertical="bottom" horizontal="end"  slot="fixed">
+        <ion-fab-button (click)="presentModal()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+ </ion-footer>

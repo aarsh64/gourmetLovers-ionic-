@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Restaurants:</ion-title>
+    <ion-buttons slot="end" color="danger" (click)="closeModal()">
+      <ion-icon name="close"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding="1%"  [scrollEvents]="true">
+<form  [formGroup]="submitForm">
+    <br /><label> <b><u>Restaurant Name:</u></b></label>
+    <ion-input  color="primary" formControlName="name" placeholder="Enter Resaturant Name:" type="text"></ion-input>
+    <label><b><u>Location:</u></b></label><br /><br />
+    <input id="searchbar1" form ngx-google-places-autocomplete [options]="options" #placesRef="ngx-places" (onAddressChange)="handleAddressChange1($event)" placeholder="Search for location!"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="off"
+      type="search"
+      class="form-control my-sm-0"
+      #search
+      [formControl]="searchControl"
+    />
+    <agm-map  [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="zoom">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker> </agm-map ><br />
+    <label><b><u>Ratings:</u></b></label>
+    <ion-input color="primary" placeholder="Rate out of 5!" formControlName="rating"></ion-input>
+      <label><b><u>Categories:</u></b></label><br>
+       <ion-label padding=1px><b>Coffee Shop</b></ion-label>
+       <ion-checkbox formControlName="coffeeshop" [(ngModel)]="checked"></ion-checkbox><br><br>
+        <ion-label padding=1px><b>Fast Food</b></ion-label>
+       <ion-checkbox formControlName="fastfood" [(ngModel)]="checked1"></ion-checkbox><br><br>
+       <ion-label padding=1px ><b>Desserts</b></ion-label>
+       <ion-checkbox formControlName="desserts" [(ngModel)]="checked2"></ion-checkbox><br>
+    <label><b><u>Images:</u></b></label>&nbsp;<br>
+    <ion-input type="file" (change)="uploadFile($event)"></ion-input>
+    <a [href]="downloadURL | async">{{ downloadURL | async }}</a
+    ><br />
+    <ion-button [disabled]="!(this.submitForm.controls.name.value && this.submitForm.controls.rating.value)"
+      slot="start"
+      color="success"
+      (click)="submit()"
+      >Submit
+    </ion-button>
+  </form>
+  
+</ion-content>
+
