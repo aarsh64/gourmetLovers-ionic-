@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AgmCoreModule } from "@agm/core"; //For Google Maps
 import { GooglePlaceModule } from "ngx-google-places-autocomplete"; //For auto-complete 
 import { HomePage } from './home.page';
-import { MapsAPILoader } from '@agm/core';
+ import { MapsAPILoader } from '@agm/core';
 import { } from '@google/maps';
 import { IonicRatingModule } from 'ionic-rating';
 import { ModalPagePage } from '../modal-page/modal-page.page';

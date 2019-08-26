@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicRatingModule } from 'ionic-rating';
 import { IonicModule } from '@ionic/angular';
+import { AgmCoreModule, MapsAPILoader } from "@agm/core"; //For Google Maps
 
 import { MyplacesPage } from './myplaces.page';
 

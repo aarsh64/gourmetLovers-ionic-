@@ -21,7 +21,7 @@ export class TopratedPage implements OnInit {
     this.restaurantDetails.splice(0, this.restaurantDetails.length);
 
     this.db
-      .collection("restaurants", ref => ref.orderBy("rating", "desc"))
+      .collection("restaurantsIonic", ref => ref.orderBy("rating", "desc"))
       .get()
       .subscribe(querySnapshot => {
         querySnapshot.forEach(result => {

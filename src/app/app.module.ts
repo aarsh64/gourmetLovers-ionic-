@@ -15,6 +15,7 @@ import {environment} from 'src/environments/environment.prod';
 import { AgmCoreModule } from "@agm/core"; //For Google Maps
 import { AuthGuard } from './auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,8 +27,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AngularFirestoreModule,
     FormsModule,
     ReactiveFormsModule,
-    // AngularFireAuthModule,
-    // Firebase,
     AppRoutingModule,
     AngularFireAuthModule,
     AgmCoreModule.forRoot({

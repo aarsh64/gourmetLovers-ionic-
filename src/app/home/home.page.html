@@ -45,7 +45,7 @@
           <ion-img width="50px" height="50px" [src]="x.image"></ion-img><br />
           <ion-rating [(rate)]="x.rating" readonly="false" size="small"></ion-rating><br/>
           <span><b>Location:</b></span>{{ x.location }}<br />
-          <!-- <b>Date:</b><span>{{ x.date.month }}/{{ x.date.year }}</span> -->
+          <!-- <b>Date:</b><span>{{ x.date | date:"dd/MM/yyyy" }}</span> -->
           <hr width="100%" />
         </ion-card>
       </ion-col>

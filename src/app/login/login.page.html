@@ -10,7 +10,8 @@
       <form [formGroup]="loginForm">
           <ion-input color="primary" formControlName='email' placeholder="Enter email address:" type="text"></ion-input>
           <ion-input color="primary" formControlName="password" placeholder="Enter password" type="password"></ion-input>
-          <ion-button (click)="login()">Login</ion-button><ion-button color="success" (click)="signup()">Sign Up</ion-button>
+          <ion-button  (click)="login()" [disabled]="!loginForm.valid">
+            Login</ion-button><ion-button color="success" [disabled]="!loginForm.valid" (click)="signup()">Sign Up</ion-button>
         </form>
   </div>
 </ion-content>

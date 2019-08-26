@@ -18,7 +18,7 @@ export class MyplacesPage implements OnInit {
 
   async ngOnInit() {
     let load = await this.loader.create({
-      message: "loading...",
+      message: "loading My Places...",
       spinner: "bubbles"
     });
     await load.present();
@@ -30,7 +30,7 @@ export class MyplacesPage implements OnInit {
       this.usersCustomerId = auth.uid;
 
       this.db
-        .collection("restaurants", ref =>
+        .collection("restaurantsIonic", ref =>
           ref.where("uid", "==", this.usersCustomerId)
         )
         .get()

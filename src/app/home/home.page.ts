@@ -75,7 +75,7 @@ export class HomePage implements OnInit {
       component: ModalPagePage
     });
     return await modal.present();
-  }
+  } 
 
   public handleAddressChange(address: any) {
     this.Location = address.formatted_address;
@@ -97,7 +97,7 @@ export class HomePage implements OnInit {
     this.setCurrentPosition();
 
     let load = await this.loader.create({
-      message: "loading...",
+      message: "loading Home...",
       spinner:'bubbles'
     });
     await load.present();
@@ -112,31 +112,74 @@ export class HomePage implements OnInit {
             image: result.data().image,
             coffeeshop:result.data().coffeeshop,
             desserts:result.data().desserts,
-            fastfood:result.data().fastfood
+            fastfood:result.data().fastfood,
+              objID: result.id,
+            users: result.data().users,
+            favourites: result.data().favourites
           });
         });
       });
+      this.db
+      .collection("restaurantsIonic").get().subscribe(querySnapshot => {
+        querySnapshot.forEach(result => {
+          this.restaurantDetails.push({
+            name: result.data().name,
+            location: result.data().location,
+            rating: result.data().rating,
+            image: result.data().image,
+            coffeeshop:result.data().coffeeshop,
+            desserts:result.data().desserts,
+            fastfood:result.data().fastfood,
+              objID: result.id,
+            users: result.data().users,
+            favourites: result.data().favourites
+          });
+        });
+      });
+    
+      
     await load.dismiss();
   }
   addToFavourites(w: any, i: number) {
     this.afAuth.authState.subscribe(auth => {
+       console.log('inside auth function!',auth.uid)
       if (w.users == undefined) {
+      console.log('auth.uid',auth.uid);
         this.userscollection.push(auth.uid);
-        this.db
-          .collection("restaurants")
-          .doc(w.objID)
-          .update({ users: this.userscollection })
-          .then(() => console.log("added to favourites,check for once!"))
-          .catch(() => {});
+          this.db
+            .collection("restaurantsIonic")
+            .doc(w.objID)
+            .update({ users: this.userscollection })
+            .then(() => { console.log('added to favourites!');} )
+            .catch((err) => { console.log('error!',err);
+              // this.toastr.error("must be wrong while adding to favourites!");
+            });
+            this.db
+            .collection("restaurants")
+            .doc(w.objID)
+            .update({ users: this.userscollection })
+            .then(() => { console.log('added to favourites!');} )
+            .catch((err) => { console.log('error!',err);
+              // this.toastr.error("must be wrong while adding to favourites!");
+            });
       } else {
         w.users.push(auth.uid);
         this.userscollection.push(w.users);
         this.db
+          .collection("restaurantsIonic")
+          .doc(w.objID)
+          .update({ users: w.users })
+          .then(() => {console.log('added to favourites!');} )
+          .catch((err) => { console.log(err);
+            // this.toastr.error("must be wrong while adding to favourites!");
+          });
+          this.db
           .collection("restaurants")
           .doc(w.objID)
           .update({ users: w.users })
-          .then(() => console.log("added to favourites,check for once!"))
-          .catch(() => {
+          .then(() => {console.log('added to favourites!');} )
+          .catch((err) => { console.log(err);
+            // this.toastr.error("must be wrong while adding to favourites!");
           });
       }
     });
@@ -158,7 +201,7 @@ export class HomePage implements OnInit {
     if (this.Location == undefined) {
       console.log("No data/new data is entered!");
     }
-    const collection = this.geo.collection("placePoints");
+    const collection = this.geo.collection("placePointsIonic");
     const center = this.geoPoint;
     const radius = 7.25; //........Will give restaurants within given point with radius of 5.5km
     const field = "position";
@@ -203,14 +246,14 @@ export class HomePage implements OnInit {
     //....................For loader(initialization)...........................
     
     let load1 = await this.loader.create({
-      message: "loading...",
+      message: "loading Coffee Shops...",
       spinner:'bubbles'
     });
     await load1.present();
     // ....................................................................
     
     //..........The following lines will fetch the restaurants which are coffeeshops...........
-    this.db.collection("restaurants", ref =>ref.where("coffeeshop", "==", true ))
+    this.db.collection("restaurantsIonic", ref =>ref.where("coffeeshop", "==", true ))
     .get()
     .subscribe(querySnapshot => {
       querySnapshot.forEach(result => {
@@ -235,7 +278,7 @@ export class HomePage implements OnInit {
      //....................For loader(initialization)...........................
 
      let load1 = await this.loader.create({
-      message: "loading...",
+      message: "loading Desserts...",
       spinner:'bubbles'
     });
     await load1.present();
@@ -243,7 +286,7 @@ export class HomePage implements OnInit {
 
     //..........The following lines will fetch the restaurants which are dessert shops...........
     
-    this.db.collection("restaurants", ref =>ref.where("desserts", "==", true ))
+    this.db.collection("restaurantsIonic", ref =>ref.where("desserts", "==", true ))
     .get()
     .subscribe(querySnapshot => {
       querySnapshot.forEach(result => {
@@ -267,7 +310,7 @@ export class HomePage implements OnInit {
 
      //....................For loader(initialization)...........................
      let load1 = await this.loader.create({
-      message: "loading...",
+      message: "loading Fast Foods...",
       spinner:'bubbles'
     });
     await load1.present();
@@ -275,7 +318,7 @@ export class HomePage implements OnInit {
 
    //..........The following lines will fetch the restaurants which are fastfood shops...........
    
-    this.db.collection("restaurants", ref =>ref.where("fastfood", "==", true ))
+    this.db.collection("restaurantsIonic", ref =>ref.where("fastfood", "==", true ))
     .get()
     .subscribe(querySnapshot => {
       querySnapshot.forEach(result => {

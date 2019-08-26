@@ -17,7 +17,7 @@ export class FavouritesPage implements OnInit {
  
 async ngOnInit() {
   let load = await this.loader.create({
-    message: "loading...",
+    message: "loading Favourites...",
     spinner: "bubbles"
   });
   await load.present();

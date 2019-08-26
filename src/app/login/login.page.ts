@@ -46,16 +46,12 @@ export class LoginPage implements OnInit {
           this.router.navigate(["/home"]);
           // this.toastr.success("Logged In Successfully!");
           // this.loaduser = false;
-        },
-        error => {
-         
-          // this.toastr.error(error.message);
         }
-        
       );
       load.dismiss();
-    this.loginForm.reset();
-  }
+      this.loginForm.reset();
+    
+    }
  async signup() {
     // this.loaduser = true;
    let load = await this.loader.create({
@@ -87,10 +83,11 @@ export class LoginPage implements OnInit {
         this.loginForm.value.password
       )
       .then(success => {
-        console.log("success", success);
-        this.loginForm.reset();
+        // console.log("success", success);
         // this.toastr.info("Account Successfully Created.");
         this.router.navigate(["/home"]);
+        this.loginForm.reset();
+      
       });
      }
 }

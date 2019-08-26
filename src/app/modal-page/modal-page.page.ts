@@ -24,6 +24,9 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class ModalPagePage implements OnInit {
 
+coffeeshop:boolean = false;
+fastfood:boolean = false;
+desserts:boolean = false;
 
   public  categories=[
     {name:'Coffee Shop',isChecked:'false'},
@@ -87,6 +90,7 @@ export class ModalPagePage implements OnInit {
       location: new FormControl("", Validators.required),
       rating: new FormControl("", Validators.required),
       image: new FormControl("", Validators.required),
+      date: new FormControl('',Validators.required),
       coffeeshop: new FormControl('',Validators.required),
       fastfood: new FormControl('',Validators.required),
       desserts: new FormControl('',Validators.required)
@@ -119,6 +123,7 @@ export class ModalPagePage implements OnInit {
 
   }
   async submit() {
+    console.log(this.submitForm.value.date);
          //....................For loader(initialization)...........................
 
          let load1 = await this.loader.create({
@@ -141,7 +146,7 @@ export class ModalPagePage implements OnInit {
         }
 
 
-    const cities = this.geo.collection("placePoints");
+    const cities = this.geo.collection("placePointsIonic");
     this.restaurantsName = this.submitForm.value.name;
     this.ranking = this.submitForm.value.rating;
     const filePath = this.fileRef.name;
@@ -154,12 +159,13 @@ export class ModalPagePage implements OnInit {
           this.usersCustomerId = auth.uid;
 
           this.db
-            .collection("restaurants")
+            .collection("restaurantsIonic")
             .add({
               name: this.restaurantsName,
               image: downloadURL,
               rating: this.ranking,
               location: this.Location,
+              date:this.submitForm.value.date,
               uid: this.usersCustomerId,
               favourites: false,
               users: [],

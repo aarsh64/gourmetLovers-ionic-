@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import {ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
+import {NgbModule,NgbDate,NgbModal,
+  ModalDismissReasons,} from '@ng-bootstrap/ng-bootstrap';
 import { ModalPagePage } from './modal-page.page';
 
 const routes: Routes = [
@@ -19,6 +20,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    NgbModule,
+    NgbDate,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],

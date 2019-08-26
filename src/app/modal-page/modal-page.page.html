@@ -25,13 +25,18 @@
       <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker> </agm-map ><br />
     <label><b><u>Ratings:</u></b></label>
     <ion-input color="primary" placeholder="Rate out of 5!" formControlName="rating"></ion-input>
+    <label>Date</label>
+    <ion-item>
+      <ion-label>MM DD YY</ion-label>
+      <ion-datetime formControlName="date" displayFormat="YYYY-MM-DD" placeholder="Select Date"></ion-datetime>
+    </ion-item>
       <label><b><u>Categories:</u></b></label><br>
        <ion-label padding=1px><b>Coffee Shop</b></ion-label>
-       <ion-checkbox formControlName="coffeeshop" [(ngModel)]="checked"></ion-checkbox><br><br>
+       <ion-checkbox formControlName="coffeeshop" [(ngModel)]="coffeeshop"></ion-checkbox><br><br>
         <ion-label padding=1px><b>Fast Food</b></ion-label>
-       <ion-checkbox formControlName="fastfood" [(ngModel)]="checked1"></ion-checkbox><br><br>
+       <ion-checkbox formControlName="fastfood" [(ngModel)]="fastfood"></ion-checkbox><br><br>
        <ion-label padding=1px ><b>Desserts</b></ion-label>
-       <ion-checkbox formControlName="desserts" [(ngModel)]="checked2"></ion-checkbox><br>
+       <ion-checkbox formControlName="desserts" [(ngModel)]="desserts"></ion-checkbox><br>
     <label><b><u>Images:</u></b></label>&nbsp;<br>
     <ion-input type="file" (change)="uploadFile($event)"></ion-input>
     <a [href]="downloadURL | async">{{ downloadURL | async }}</a
